@@ -1,27 +1,28 @@
 import { useEffect, useState } from 'react';
 import api from '../../services/api';
+import { EstadoModel } from '../estados/ListEstados';
 import { Footer } from '../footer/Footer';
 import { Header } from '../header/Header';
 import Menu from '../menu/Menu';
 
 // Here
-export interface EstadoModel {
+interface CidadeModel {
     id: number;
     nome: string;
-    sigla: string;
     created_at: string;
+    estado: EstadoModel;
 }
 
-const ListEstados = () => {
+const ListCidades = () => {
 
-    const [ estados, setEstados ] = useState<EstadoModel[]>([]);
+    const [ cidades, setCidades ] = useState<CidadeModel[]>([]);
 
     const loadData = () => {
         console.log('loadData()');
-        api.get('/estados')
+        api.get('/cidades')
             .then(response => {
                 console.log(response);
-                setEstados(response.data);
+                setCidades(response.data);
             })
     }
 
@@ -39,18 +40,18 @@ const ListEstados = () => {
                 <tr>
                     <th>Id</th>
                     <th>Nome</th>
-                    <th>Sigla</th>
                     <th>Criação</th>
+                    <th>Estado</th>
                 </tr>
             </thead>
             <tbody>
 
-                { estados.map( item => (
+                { cidades.map( item => (
                     <tr>
                         <td>{item.id}</td>
                         <td>{item.nome}</td>
-                        <td>{item.sigla}</td>
                         <td>{item.created_at}</td>
+                        <td>{item.estado.sigla}</td>
                     </tr>   
                 ) )
                 
@@ -64,4 +65,4 @@ const ListEstados = () => {
 
 }
 
-export default ListEstados;
+export default ListCidades;
