@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
 import api from '../../services/api';
 import { EstadoModel } from '../estados/ListEstados';
-import { Footer } from '../footer/Footer';
-import { Header } from '../header/Header';
-import Menu from '../menu/Menu';
 
 // Here
 interface CidadeModel {
@@ -33,8 +30,6 @@ const ListCidades = () => {
 
     return(
         <>
-        <Header />
-        <Menu />
         <table>
             <thead>
                 <tr>
@@ -59,7 +54,6 @@ const ListCidades = () => {
 
             </tbody>
         </table>
-        <Footer />
         </>        
     );
 

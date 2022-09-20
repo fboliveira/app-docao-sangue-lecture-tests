@@ -32,8 +32,6 @@ const ListEstados = () => {
 
     return(
         <>
-        <Header />
-        <Menu />
         <table>
             <thead>
                 <tr>
@@ -58,7 +56,6 @@ const ListEstados = () => {
 
             </tbody>
         </table>
-        <Footer />
         </>        
     );
 
