@@ -5,14 +5,18 @@ export class DeleteEstadoController {
 
     async handle(request, response) {
 
-        const { id } = request.body;
+        const { id } = request.body.data;
+        console.log(request.body.data);
 
         try {
+            console.log(`[DeleteEstadoController] Deleting id: ${id}`);
             const estado = await prismaClient.estado.delete({
                 where: {
-                    id: id
+                    id: parseInt(id)
                 }
             });
+            return response.json(estado);
+
         } catch (error) {
             if (error instanceof PrismaClientKnownRequestError && error.code === "P2025") {
                 console.log(`[DeleteEstadoController] Estado id: ${id} does not exist!`);
@@ -22,7 +26,6 @@ export class DeleteEstadoController {
             }
         }
 
-        return response.json(estado);
     }
 
 }

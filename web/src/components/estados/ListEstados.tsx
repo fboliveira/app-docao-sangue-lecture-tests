@@ -1,10 +1,6 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import api from '../../services/api';
-import { Footer } from '../footer/Footer';
-import { Header } from '../header/Header';
-import Menu from '../menu/Menu';
-
-// Here
 export interface EstadoModel {
     id: number;
     nome: string;
@@ -14,49 +10,46 @@ export interface EstadoModel {
 
 const ListEstados = () => {
 
-    const [ estados, setEstados ] = useState<EstadoModel[]>([]);
+    const [estados, setEstados] = useState<EstadoModel[]>([]);
 
-    const loadData = () => {
+    useEffect(() => {
         console.log('loadData()');
         api.get('/estados')
             .then(response => {
                 console.log(response);
                 setEstados(response.data);
             })
-    }
+    }, []);
 
-    useEffect(() => {
-        loadData();
-    },[]);
-
-
-    return(
+    return (
         <>
-        <table>
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Nome</th>
-                    <th>Sigla</th>
-                    <th>Criação</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                { estados.map( item => (
+            <table>
+                <thead>
                     <tr>
-                        <td>{item.id}</td>
-                        <td>{item.nome}</td>
-                        <td>{item.sigla}</td>
-                        <td>{item.created_at}</td>
-                    </tr>   
-                ) )
-                
-                }
+                        <th>Id</th>
+                        <th>Nome</th>
+                        <th>Sigla</th>
+                        <th>Criação</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-            </tbody>
-        </table>
-        </>        
+                    {estados.map(item => (
+                        <tr key={item.id}>
+                            <td>{item.id}</td>
+                            <td>{item.nome}</td>
+                            <td>{item.sigla}</td>
+                            <td>{item.created_at}</td>
+                            <td><Link to={`/estados/show/${item.id}`}>Visualizar</Link></td>
+                        </tr>
+                    ))
+
+                    }
+
+                </tbody>
+            </table>
+        </>
     );
 
 }
