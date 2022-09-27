@@ -36,7 +36,7 @@ const UpdateEstado = () => {
             await api.put('/estados', data);
             navigate('/estados');
         } catch(error) {
-            alert('Erro ao cadastrar o Estado!');
+            alert('Erro ao atualizar o Estado!');
             console.error(error);
         }
 
