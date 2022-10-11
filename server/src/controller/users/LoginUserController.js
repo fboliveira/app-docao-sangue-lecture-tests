@@ -1,24 +1,50 @@
-import jwt from 'jsonwebtoken';
+import { prismaClient } from "../../database/client.js";
+import jwt from "jsonwebtoken";
 
 export class LoginUserController {
 
     async handle(request, response) {
 
-        // Validate user
-        const jwtSecretKey = process.env.JWT_SECRET_KEY;
-        const tokenHeaderKey = process.env.JWT_TOKEN_HEADER_KEY;
+        const { email, password } = request.body;      
 
-        const data = {
-            loginTime: Date(),
-            user_id: 10
+        console.log({ email, password });
+
+        const user = await prismaClient.user.findUnique({
+            where: {
+                email: email,
+            }
+        });
+
+        if (!user) {
+            return response.status(403).send({
+                message: "Usuário e/ou senha inválidos!"
+            });
         }
 
-        const token = jwt.sign(data, jwtSecretKey);
+        // Hash password -> user.password
+        if ( user.password !== password ) {
+            return response.status(403).send({
+                message: "Usuário e/ou senha inválidos!"
+            });
+        }
 
-        return response.send({
+        // JWT - Token
+        const data = {
+            id: user.id,
+            email,
+            loginDate: Date()
+        };
+
+        const token = jwt.sign(data, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
+
+        response.send({
+            id: user.id,
+            nome: user.nome,
             token,
-            header: tokenHeaderKey
-            })
+            header: process.env.JWT_HEADER_KEY
+        });
+
     }
+
 
 }

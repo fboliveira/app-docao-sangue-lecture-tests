@@ -5,6 +5,8 @@ import { GetByIdCidadeController } from '../controller/cidades/GetByIdCidadeCont
 import { UpdateCidadeController } from '../controller/cidades/UpdateCidadeController.js';
 import { DeleteCidadeController } from '../controller/cidades/DeleteCidadeController.js';
 
+import { AuthMiddleware } from '../middleware/auth.js';
+
 const cidadeRouter = Router();
 
 const createCidadeController = new CreateCidadeController();
@@ -13,8 +15,10 @@ const getByIdCidadeController = new GetByIdCidadeController();
 const updateCidadeController = new UpdateCidadeController();
 const deleteCidadeController = new DeleteCidadeController();
 
+const authMiddleware = new AuthMiddleware();
+
 cidadeRouter.post('/cidades', createCidadeController.handle);
-cidadeRouter.get('/cidades', getAllCidadeController.handle);
+cidadeRouter.get('/cidades', authMiddleware.handle, getAllCidadeController.handle);
 cidadeRouter.get('/cidades/:id', getByIdCidadeController.handle);
 cidadeRouter.put('/cidades', updateCidadeController.handle);
 cidadeRouter.delete('/cidades', deleteCidadeController.handle);

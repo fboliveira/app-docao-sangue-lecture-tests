@@ -9,18 +9,24 @@ import UpdateEstado from "./components/estados/UpdateEstado";
 import Header from "./components/header/Header";
 import Menu from "./components/menu/Menu";
 
+import LoginUser from "./components/login/LoginUser";
+
 const AppRoutes = () => {
+
+    const userName = window.localStorage.getItem('username') || undefined;    
 
     return(
 
         <BrowserRouter>
 
-            <Header />
+            <Header name={userName} />
             <Menu />
 
             <Routes>
 
                 <Route path="/" element={ <App /> } />
+
+                <Route path="/login" element={ <LoginUser /> } />
 
                 <Route path="/estados" element={<ListEstados />} />
 
