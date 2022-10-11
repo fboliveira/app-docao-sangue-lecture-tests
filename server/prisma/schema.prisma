@@ -29,3 +29,15 @@ model Cidade {
 
   @@map("cidades")
 }
+
+model User {
+
+  id         Int      @id @default(autoincrement())
+  nome       String
+  email      String   @unique
+  password   String
+  created_at DateTime @default(now())
+
+  @@map("users")
+
+}

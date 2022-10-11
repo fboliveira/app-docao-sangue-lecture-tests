@@ -90,3 +90,15 @@ Content-Type: application/json
 {
     "id": 32
 }
+
+### 
+GET http://localhost:4000/users/login
+
+###
+POST http://localhost:4000/users/validate
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpblRpbWUiOiJUdWUgT2N0IDA0IDIwMjIgMTU6MTk6MDcgR01ULTAzMDAgKEJyYXNpbGlhIFN0YW5kYXJkIFRpbWUpIiwidXNlcl9pZCI6MTAsImlhdCI6MTY2NDkwNzU0N30.TUQU0YSXkaJ3QxpLQcXEJYkKuOo2O2_gx1PecqqZK10
+
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpblRpbWUiOiJUdWUgT2N0IDA0IDIwMjIgMTU6MTk6MDcgR01ULTAzMDAgKEJyYXNpbGlhIFN0YW5kYXJkIFRpbWUpIiwidXNlcl9pZCI6MTAsImlhdCI6MTY2NDkwNzU0N30.TUQU0YSXkaJ3QxpLQcXEJYkKuOo2O2_gx1PecqqZK10",
+  "header": "app_token"
+}
