@@ -32,7 +32,9 @@ const LoginUser = () => {
                     window.localStorage.setItem('token', token);
                     window.localStorage.setItem('prefix', header);
 
-                    setLogged(true);
+                    // setLogged(true);
+                    navigate('/');
+                    window.location.reload();
 
                 })
                 .catch(data => {
@@ -46,14 +48,15 @@ const LoginUser = () => {
                     }
                 });
 
-            if (isLogged) {
-                console.log('Redirecting...');
-                navigate('/');
-            }
         } catch (error) {
             console.error(error);
         }
 
+        // if (isLogged) {
+        //     console.log('Redirecting...');
+        //     navigate('/');
+            
+        // }
 
     }
 

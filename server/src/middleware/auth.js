@@ -10,17 +10,20 @@ export class AuthMiddleware {
 
         console.log("[AuthMiddleware] Validating...");
 
-        console.log(request.headers['authorization']);
+        // console.log(request.headers['authorization']);
 
         try {
             const authorization = request.headers['authorization'].split (' ');
 
-            const header = authorization[0];
-            const token = authorization[1];
+            const bearer = authorization[0];
+            const header = authorization[1];
+            const token = authorization[2];
             
             console.log ({
+                bearer,
                 header,
-                tokenHeaderKey
+                tokenHeaderKey,
+                token
             });
 
             if (header !== tokenHeaderKey) {

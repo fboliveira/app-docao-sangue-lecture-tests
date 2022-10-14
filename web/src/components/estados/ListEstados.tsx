@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 export interface EstadoModel {
     id: number;
@@ -11,15 +11,32 @@ export interface EstadoModel {
 const ListEstados = () => {
 
     const [estados, setEstados] = useState<EstadoModel[]>([]);
-
+    const navigate = useNavigate();
+    
     useEffect(() => {
-        console.log('loadData()');
-        api.get('/estados')
+        
+        const token = window.localStorage.getItem('token') || undefined;
+
+        if ( token === undefined ) {
+            navigate('/login')
+        }
+
+        const header = window.localStorage.getItem('prefix');
+
+        const config = {
+            headers: {
+                "Authorization" : `Bearer ${header} ${token}`
+            }
+        }
+
+        console.log('[ListEstados] loadData():');
+        console.log(config.headers);
+        api.get('/estados', config)
             .then(response => {
                 console.log(response);
                 setEstados(response.data);
             })
-    }, []);
+    }, [navigate]);
 
     return (
         <>
