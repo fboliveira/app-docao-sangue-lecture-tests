@@ -2,13 +2,12 @@ import Link from "next/link";
 
 export default function Menu() {
 
-    const cssMenu = "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-
     return(
         <nav className="bg-gray-800">
             <div className="flex space-x-4">
-                <Link href="/" className={cssMenu}>Home</Link>
-                <Link href="/estados" className={cssMenu}>Estados</Link>
+                <Link href="/" className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Home</Link>
+                <Link href="/estados" className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Estados</Link>
+                <Link href="/cidades" className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Cidades</Link>
             </div>
         </nav>
     )
